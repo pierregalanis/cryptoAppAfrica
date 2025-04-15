@@ -8,25 +8,19 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder  // ✅ THIS is required to enable User.builder()
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
-
     private String phone;
+    private String username;
+    private String role;
 
-    private String role; // e.g., USER, ADMIN
-
-    private boolean enabled = true;
-
-    private boolean kycVerified = false;
+    private boolean enabled;       // ✅ Must be declared here
+    private boolean kycVerified;
 }

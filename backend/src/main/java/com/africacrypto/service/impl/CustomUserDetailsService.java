@@ -1,4 +1,4 @@
-package com.africacrypto.service.util;
+package com.africacrypto.service.impl;
 
 import com.africacrypto.entity.User;
 import com.africacrypto.repository.UserRepository;
