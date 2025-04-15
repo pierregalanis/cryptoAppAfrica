@@ -7,4 +7,6 @@ import com.africacrypto.dto.UserDTO;
 public interface UserService {
     UserDTO register(RegisterRequest request);
     String login(LoginRequest request); // returns JWT
+
+    void promoteToAdmin(String email);
 }

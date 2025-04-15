@@ -3,12 +3,14 @@ package com.africacrypto.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder  // ✅ THIS is required to enable User.builder()
+@Builder
 public class User {
 
     @Id
@@ -19,8 +21,12 @@ public class User {
     private String password;
     private String phone;
     private String username;
-    private String role;
 
-    private boolean enabled;       // ✅ Must be declared here
+    private boolean enabled;
     private boolean kycVerified;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<String> roles;
 }
