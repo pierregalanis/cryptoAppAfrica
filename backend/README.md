@@ -119,6 +119,12 @@ backend/
 ```
 
 ---
+To update Price to CFA:
+Map<String, Map<String, Double>> prices = coinGeckoService.getPrices(ids, "fcfa");
+
+Option A: Make /api/crypto/** public (for now)
+If you want this endpoint available without login, update your SecurityConfig.java:
+.requestMatchers("/api/crypto/**").permitAll()
 
 ## 🤝 Contributions
 

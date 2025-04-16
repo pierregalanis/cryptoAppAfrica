@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // ✅ disable CSRF (required for POST)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // ✅ allow login/register
+                        .requestMatchers("/api/crypto/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess
@@ -47,6 +48,8 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
+
 }
