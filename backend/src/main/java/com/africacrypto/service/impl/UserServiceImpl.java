@@ -61,9 +61,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return jwtUtil.generateToken(user.getEmail());
+        // ✅ Updated to pass both email and userId to generateToken
+        return jwtUtil.generateToken(user.getEmail(), user.getId());
     }
-
 
     @Override
     public void promoteToAdmin(String email) {
@@ -75,5 +75,4 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("🚀 Promoted " + email + " to ADMIN");
     }
-
 }
