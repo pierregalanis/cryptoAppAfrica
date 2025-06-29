@@ -19,6 +19,7 @@ public class CryptoController {
     // ✅ Simple health check
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
+
         return ResponseEntity.ok("pong");
     }
 

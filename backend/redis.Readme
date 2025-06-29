@@ -1,0 +1,40 @@
+Redis + Docker + Spring Boot Cheat Sheet
+=========================================
+Redis + Docker Cheat Sheet (Step-by-Step Guide)
+1. Start Redis using Docker:
+docker run -d -p 6379:6379 --name redis-server redis
+2. If container name conflict:
+docker rm redis-server
+docker run -d -p 6379:6379 --name redis-server redis
+3. Start an existing Redis container:
+docker start redis-server
+4. Check if Redis is running:
+winpty docker exec -it redis-server redis-cli ping
+Expected output: PONG
+5. List Redis keys:
+winpty docker exec -it redis-server redis-cli
+> KEYS *
+6. Inspect a Redis value:
+> GET testCache::aboh
+7. Delete a specific Redis key:
+> DEL testCache::aboh
+Testing Spring Boot Redis Cache:
+curl http://localhost:8080/api/test/greeting?name=aboh
+- First call logs: "Not from cache"
+- Second call: Same timestamp, no log, served from Redis
+Spring Boot Redis Configuration:
+application.properties:
+-----------------------
+spring.cache.type=redis
+spring.data.redis.host=localhost
+spring.data.redis.port=6379
+TTL in RedisConfig.java:
+------------------------
+.entryTtl(Duration.ofMinutes(10))
+Optional Actuator Health Check:
+application.properties:
+-----------------------
+management.endpoints.web.exposure.include=health
+management.endpoint.health.show-details=always
+Then call:
+curl http://localhost:8080/actuator/health

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
+                .password(passwordEncoder.encode(request.getPassword())) //encode pw (hashed)
                 .enabled(true)
                 .kycVerified(false)
                 .roles(Set.of("USER")) // 🔐 default role
